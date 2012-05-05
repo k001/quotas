@@ -25,7 +25,7 @@
   | The Original Code is: Elastix Open Source.                           |
   | The Initial Developer of the Original Code is PaloSanto Solutions    |
   +----------------------------------------------------------------------+
-  $Id: index.php,v 1.1 2012-05-05 06:05:29 Ivan Zenteno ivan.zenteno@infapen.com Exp $ */
+  $Id: index.php,v 1.1 2012-05-05 12:05:05 Ivan A. Zenteno Aguilar ivan.zenteno@infapen.com Exp $ */
 //include elastix framework
 include_once "libs/paloSantoGrid.class.php";
 include_once "libs/paloSantoForm.class.php";
@@ -34,7 +34,7 @@ function _moduleContent(&$smarty, $module_name)
 {
     //include module files
     include_once "modules/$module_name/configs/default.conf.php";
-    include_once "modules/$module_name/libs/paloSantoquotas.class.php";
+    include_once "modules/$module_name/libs/paloSantoQuotas.class.php";
 
     //include file language agree to elastix configuration
     //if file language not exists, then include language by default (en)
@@ -67,20 +67,20 @@ function _moduleContent(&$smarty, $module_name)
 
     switch($action){
         case "save_new":
-            $content = saveNewquotas($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
+            $content = saveNewQuotas($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
             break;
         default: // view_form
-            $content = viewFormquotas($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
+            $content = viewFormQuotas($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
             break;
     }
     return $content;
 }
 
-function viewFormquotas($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
+function viewFormQuotas($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
 {
-    $pquotas = new paloSantoquotas($pDB);
-    $arrFormquotas = createFieldForm();
-    $oForm = new paloForm($smarty,$arrFormquotas);
+    $pQuotas = new paloSantoQuotas($pDB);
+    $arrFormQuotas = createFieldForm();
+    $oForm = new paloForm($smarty,$arrFormQuotas);
 
     //begin, Form data persistence to errors and other events.
     $_DATA  = $_POST;
@@ -95,12 +95,12 @@ function viewFormquotas($smarty, $module_name, $local_templates_dir, &$pDB, $arr
     //end, Form data persistence to errors and other events.
 
     if($action=="view" || $action=="view_edit"){ // the action is to view or view_edit.
-        $dataquotas = $pquotas->getquotasById($id);
-        if(is_array($dataquotas) & count($dataquotas)>0)
-            $_DATA = $dataquotas;
+        $dataQuotas = $pQuotas->getQuotasById($id);
+        if(is_array($dataQuotas) & count($dataQuotas)>0)
+            $_DATA = $dataQuotas;
         else{
             $smarty->assign("mb_title", _tr("Error get Data"));
-            $smarty->assign("mb_message", $pquotas->errMsg);
+            $smarty->assign("mb_message", $pQuotas->errMsg);
         }
     }
 
@@ -110,17 +110,17 @@ function viewFormquotas($smarty, $module_name, $local_templates_dir, &$pDB, $arr
     $smarty->assign("REQUIRED_FIELD", _tr("Required field"));
     $smarty->assign("icon", "images/list.png");
 
-    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas"), $_DATA);
+    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("Quotas"), $_DATA);
     $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name'>".$htmlForm."</form>";
 
     return $content;
 }
 
-function saveNewquotas($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
+function saveNewQuotas($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
 {
-    $pquotas = new paloSantoquotas($pDB);
-    $arrFormquotas = createFieldForm();
-    $oForm = new paloForm($smarty,$arrFormquotas);
+    $pQuotas = new paloSantoQuotas($pDB);
+    $arrFormQuotas = createFieldForm();
+    $oForm = new paloForm($smarty,$arrFormQuotas);
 
     if(!$oForm->validateForm($_POST)){
         // Validation basic, not empty and VALIDATION_TYPE 
@@ -132,7 +132,7 @@ function saveNewquotas($smarty, $module_name, $local_templates_dir, &$pDB, $arrC
                 $strErrorMsg .= "$k, ";
         }
         $smarty->assign("mb_message", $strErrorMsg);
-        $content = viewFormquotas($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
+        $content = viewFormQuotas($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
     }
     else{
         //NO ERROR, HERE IMPLEMENTATION OF SAVE
@@ -146,12 +146,13 @@ function createFieldForm()
     $arrOptions = array('val1' => 'Value 1', 'val2' => 'Value 2', 'val3' => 'Value 3');
 
     $arrFields = array(
-            "form_quota"   => array(      "LABEL"                  => _tr("form_quota"),
+            "estado"   => array(      "LABEL"                  => _tr("Estado"),
                                             "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "INPUT_TYPE"             => "SELECT",
+                                            "INPUT_EXTRA_PARAM"      => $arrOptions,
                                             "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            "VALIDATION_EXTRA_PARAM" => "",
+                                            "EDITABLE"               => "si",
                                             ),
 
             );

@@ -20,8 +20,8 @@
 </table>
 <table class="tabForm" style="font-size: 16px;" width="100%" >
     <tr class="letra12">
-        <td align="left"><b>{$form_quota.LABEL}: <span  class="required">*</span></b></td>
-        <td align="left">{$form_quota.INPUT}</td>
+        <td align="left"><b>{$estado.LABEL}: <span  class="required">*</span></b></td>
+        <td align="left">{$estado.INPUT}</td>
     </tr>
 
 </table>

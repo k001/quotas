@@ -25,7 +25,7 @@
   | The Original Code is: Elastix Open Source.                           |
   | The Initial Developer of the Original Code is PaloSanto Solutions    |
   +----------------------------------------------------------------------+
-  $Id: default.conf.php,v 1.1 2012-05-05 06:05:29 Ivan Zenteno ivan.zenteno@infapen.com Exp $ */
+  $Id: default.conf.php,v 1.1 2012-05-05 12:05:05 Ivan A. Zenteno Aguilar ivan.zenteno@infapen.com Exp $ */
     global $arrConf;
     global $arrConfModule;
 
