@@ -27,27 +27,27 @@
     <tr class="letra12">
         <td align="left"><b>18-24 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$diezocho.INPUT}</td>
-        <td align="left">{$diezocho.INPUT}</td>
+        <td align="right">{$diezocho.INPUT}</td>
     </tr>
     <tr class="letra12">
         <td align="left"><b>25-32 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$veinticinco.INPUT}</td>
-        <td align="left">{$veinticinco.INPUT}</td>
+        <td align="right">{$veinticinco.INPUT}</td>
     </tr>
     <tr class="letra12">
         <td align="left"><b>33-40 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$treintaytres.INPUT}</td>
-        <td align="left">{$treintaytres.INPUT}</td>
+        <td align="right">{$treintaytres.INPUT}</td>
     </tr>
     <tr class="letra12">
         <td align="left"><b>41-53 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$cuarentayuno.INPUT}</td>
-        <td align="left">{$cuarentayuno.INPUT}</td>
+        <td align="right">{$cuarentayuno.INPUT}</td>
     </tr>
     <tr class="letra12">
         <td align="left"><b>54 y m&aacute;s: <span  class="required">*</span></b></td>
         <td align="left">{$cincuentaycuatro.INPUT}</td>
-        <td align="left">{$cincuentaycuatro.INPUT}</td>
+        <td align="right">{$cincuentaycuatro.INPUT}</td>
     </tr>
 
 </table>
