@@ -95,7 +95,7 @@ function viewFormquotas_user($smarty, $module_name, $local_templates_dir, &$pDB,
     //end, Form data persistence to errors and other events.
 
     if($action=="view" || $action=="view_edit"){ // the action is to view or view_edit.
-        $dataquotas_user = $pquotas_user->getquotas_userById($id);
+#        $dataquotas_user = $pquotas_user->getquotas_userById($id);
         if(is_array($dataquotas_user) & count($dataquotas_user)>0)
             $_DATA = $dataquotas_user;
         else{
