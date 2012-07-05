@@ -19,28 +19,30 @@
     </tr>
 </table>
 <table class="tabForm" style="font-size: 16px;" width="100%" >
+	<tr class="letra12">
+		<td align="left"><b>EDAD</b></td>
+		<td align="left"><b>Hombres</b></td>
+		<td align="left"><b>Mujeres</b></td>
+	</tr>
+	</tr>
     <tr class="letra12">
-        <td align="left"><b>{$edad.LABEL}: <span  class="required">*</span></b></td>
-        <td align="left">{$edad.INPUT}</td>
-    </tr>
-    <tr class="letra12">
-        <td align="left"><b>{$diezocho.LABEL}: <span  class="required">*</span></b></td>
+        <td align="left"><b>18-24 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$diezocho.INPUT}</td>
     </tr>
     <tr class="letra12">
-        <td align="left"><b>{$veinticinco.LABEL}: <span  class="required">*</span></b></td>
+        <td align="left"><b>25-32 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$veinticinco.INPUT}</td>
     </tr>
     <tr class="letra12">
-        <td align="left"><b>{$treintaytres.LABEL}: <span  class="required">*</span></b></td>
+        <td align="left"><b>33-40 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$treintaytres.INPUT}</td>
     </tr>
     <tr class="letra12">
-        <td align="left"><b>{$cuarentayuno.LABEL}: <span  class="required">*</span></b></td>
+        <td align="left"><b>41-53 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$cuarentayuno.INPUT}</td>
     </tr>
     <tr class="letra12">
-        <td align="left"><b>{$cincuentaycuatro.LABEL}: <span  class="required">*</span></b></td>
+        <td align="left"><b>54 y m&aacute;s: <span  class="required">*</span></b></td>
         <td align="left">{$cincuentaycuatro.INPUT}</td>
     </tr>
 

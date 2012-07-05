@@ -103,5 +103,18 @@ class paloSantoquotas_user{
         }
         return $result;
     }
+    
+    function getForms()
+    {
+    	$arrParam = null;
+	    $query = "SELECT * FROM form";
+	    $result = $this->_DB->fetchTable($query, true, $arrParam);
+	    if($result == FALSE)
+	    {
+			$this->errMsg = $this->_DB->errMsg;
+			return null;   
+	    }
+	    return $result;
+    }
 }
 ?>
