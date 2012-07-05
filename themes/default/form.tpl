@@ -24,7 +24,6 @@
 		<td align="left"><b>Hombres</b></td>
 		<td align="left"><b>Mujeres</b></td>
 	</tr>
-	</tr>
     <tr class="letra12">
         <td align="left"><b>18-24 a&ntilde;os: <span  class="required">*</span></b></td>
         <td align="left">{$diezocho.INPUT}</td>
