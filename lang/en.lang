@@ -28,12 +28,12 @@
   $Id: en.lang,v 1.1 2012-05-12 09:05:12 Ivan Zenteno ivan.zenteno@infapen.com Exp $ */
 global $arrLangModule;
 $arrLangModule=array(
-"quotas_user" => "quotas_user",
+"quotas_user" => "Quotas Usuario",
 "Edad" => "Edad",
-"Diezocho" => "Diezocho",
-"Veinticinco" => "Veinticinco",
-"Treintaytres" => "Treintaytres",
-"Cuarentayuno" => "Cuarentayuno",
-"Cincuentaycuatro" => "Cincuentaycuatro",
+"Diezocho" => "18 - 24",
+"Veinticinco" => "25 - 32",
+"Treintaytres" => "33 - 40",
+"Cuarentayuno" => "41 - 53",
+"Cincuentaycuatro" => "54 y mas",
 );
 ?>
