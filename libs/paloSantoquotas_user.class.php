@@ -28,7 +28,9 @@
   $Id: paloSantoquotas_user.class.php,v 1.1 2012-05-12 09:05:12 Ivan Zenteno ivan.zenteno@infapen.com Exp $ */
 class paloSantoquotas_user{
     var $_DB;
-    var $errMsg;
+    var $errMs;
+    private $_oDB_call_center = NULL;
+    private $_oDB_quotas_user = NULL;
 
     function paloSantoquotas_user(&$pDB)
     {
@@ -104,17 +106,96 @@ class paloSantoquotas_user{
         return $result;
     }
     
-    function getForms()
+    function obtenerFormularios()
     {
     	$arrParam = null;
-	    $query = "SELECT * FROM form";
-	    $result = $this->_DB->fetchTable($query, true, $arrParam);
-	    if($result == FALSE)
-	    {
-			$this->errMsg = $this->_DB->errMsg;
-			return null;   
-	    }
-	    return $result;
+	    $query = "SELECT id, nombre FROM form";
+	    $oDB = $this->obtenerConexion("call_center");
+	    
+	    $rs = $oDB->fetchTable($query, true, $arrParam);
+	    if (!is_array($rs)) die('(internal) Cannot list agents - '.$oDB->errMsg);
+        $listaFormularios = array();
+        foreach ($rs as $tupla) {
+            $listaFormularios[$tupla['id']] = $tupla['nombre'];
+        }
+        return $listaFormularios;
+    }
+    
+    private function obtenerConexion($sConn)
+    {
+    	global $arrConf;
+    	switch($sConn)
+    	{
+        case 'call_center':
+            if (!is_null($this->_oDB_call_center)) return $this->_oDB_call_center;
+            $sDSN = $arrConf['cadena_dsn'];
+            $oDB = new paloDB($sDSN);
+            if ($oDB->connStatus) {
+                $this->_errMsg = '(internal) Unable to create asterisk DB conn - '.$oDB->errMsg;
+                die($this->_errMsg);
+            }
+            $this->_oDB_asterisk = $oDB;
+            return $this->_oDB_asterisk;
+            break;
+
+        case 'quotas_user':
+            if (!is_null($this->_oDB_quotas_user)) return $this->_oDB_quotas_user;
+            $sDSN = $arrConf['dsn_conn_database'];
+            $oDB = new paloDB($sDSN);
+            if ($oDB->connStatus) {
+                $this->_errMsg = '(internal) Unable to create asterisk DB conn - '.$oDB->errMsg;
+                die($this->_errMsg);
+            }
+            $this->_oDB_asterisk = $oDB;
+            return $this->_oDB_asterisk;
+            break;
+
+    	}
+	 	return NULL;   
+    }
+    
+    function saveInfo($arrParam)
+    {
+        $_DATA  = $_POST;
+        unset($_DATA['save_new']);
+        unset($_DATA['id']);
+        $query_value = 'INSERT INTO quotas_user (form_id, sex_id, quotas_user_range_id, value) VALUES ';
+        $query_value .= "{$_DATA['input_formulario']}, ";
+        switch($_DATA){
+		    case '1h':
+		    			$query_value .= "1, ";
+		    			$query_value .= $_DATA['1h'];
+		    			break;
+		    case '1m':
+		    			$query_value .= $_DATA['1h'];
+		    			break;        
+		    case '2h':
+		    			$query_value .= $_DATA['2h'];
+		    			break;
+		    case '2m':
+		    			$query_value .= $_DATA['2m'];
+		    			break;
+		    case '3h':
+		    			$query_value .= $_DATA['3h'];
+		    			break;
+		    case '3m':
+		    			$query_value .= $_DATA['3m'];
+		    			break;
+		    case '4h':
+		    			$query_value .= $_DATA['4h'];
+		    			break;
+		    case '4m':
+		    			$query_value .= $_DATA['4m'];
+		    			break;
+		    case '5h':
+		    			$query_value .= $_DATA['5h'];
+		    			break;
+		    case '5m':
+		    			$query_value .= $_DATA['5m'];
+		    			break;
+		}
+		
+		$oD    
     }
 }
 ?>
