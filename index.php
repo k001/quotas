@@ -87,7 +87,7 @@ function viewFormquotas_user($smarty, $module_name, $local_templates_dir, &$pDB,
     $action = getParameter("action");
     $id     = getParameter("id");
     $smarty->assign("ID", $id); //persistence id with input hidden in tpl
-
+        
     if($action=="view")
         $oForm->setViewMode();
     else if($action=="view_edit" || getParameter("save_edit"))
@@ -95,7 +95,7 @@ function viewFormquotas_user($smarty, $module_name, $local_templates_dir, &$pDB,
     //end, Form data persistence to errors and other events.
 
     if($action=="view" || $action=="view_edit"){ // the action is to view or view_edit.
-#        $dataquotas_user = $pquotas_user->getquotas_userById($id);
+        $dataquotas_user = $pquotas_user->getquotas_userById($id);
         if(is_array($dataquotas_user) & count($dataquotas_user)>0)
             $_DATA = $dataquotas_user;
         else{
@@ -104,11 +104,15 @@ function viewFormquotas_user($smarty, $module_name, $local_templates_dir, &$pDB,
         }
     }
 
+    $formularios = $pquotas_user->obtenerFormularios();
+
     $smarty->assign("SAVE", _tr("Save"));
     $smarty->assign("EDIT", _tr("Edit"));
     $smarty->assign("CANCEL", _tr("Cancel"));
     $smarty->assign("REQUIRED_FIELD", _tr("Required field"));
     $smarty->assign("icon", "images/list.png");
+    $smarty->assign("FORMULARIOS", $formularios);
+    
 
     $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas_user"), $_DATA);
     $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name'>".$htmlForm."</form>";
@@ -137,58 +141,94 @@ function saveNewquotas_user($smarty, $module_name, $local_templates_dir, &$pDB, 
     else{
         //NO ERROR, HERE IMPLEMENTATION OF SAVE
         $content = "Code to save yet undefined.";
+
+
+        exit(0);
     }
     return $content;
 }
 
 function createFieldForm()
 {
-    $arrOptions = array('val1' => 'Value 1', 'val2' => 'Value 2', 'val3' => 'Value 3');
-
     $arrFields = array(
-            "edad"   => array(      "LABEL"                  => _tr("Edad"),
-                                            "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "diezocho"   => array(      "LABEL"                  => _tr("Diezocho"),
-                                            "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "veinticinco"   => array(      "LABEL"                  => _tr("Veinticinco"),
-                                            "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "treintaytres"   => array(      "LABEL"                  => _tr("Treintaytres"),
-                                            "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "cuarentayuno"   => array(      "LABEL"                  => _tr("Cuarentayuno"),
-                                            "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "cincuentaycuatro"   => array(      "LABEL"                  => _tr("Cincuentaycuatro"),
-                                            "REQUIRED"               => "no",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
 
+            "1h"   => array(     	"LABEL"                  => _tr("18-24"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "1m"   => array(      	"LABEL"                  => _tr("18-24"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "2h"   => array(      "LABEL"                  => _tr("25-32"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "2m"   => array(      "LABEL"                  => _tr("25-32"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "3h"   => array(     "LABEL"                  => _tr("33-40"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),                                            
+            "3m"   => array(     "LABEL"                  => _tr("33-40"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),                                            
+            "4h"   => array(      "LABEL"                  => _tr("41-53"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "4m"   => array(     "LABEL"                  => _tr("41-53"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "5h"   => array( "LABEL"                  => _tr("54 y más"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "5m"   => array( "LABEL"                  => _tr("54 y más"),
+                                            "REQUIRED"               => "yes",
+                                            "INPUT_TYPE"             => "TEXT",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            "VALIDATION_TYPE"        => "text",
+                                            "VALIDATION_EXTRA_PARAM" => ""
+                                            ),
+            "input_formulario" 	=>	array(	"LABEL"				=>	_tr("Formulario"),
+            								"REQUIRED"				=>	"yes",
+            								"INPUT_TYPE"			=>	"SELECT",
+            								"VALIDATION_TYPE"		=> "numeric",
+                                            "VALIDATION_EXTRA_PARAM" => "",
+                                            "INPUT_EXTRA_PARAM"      => "",
+                                            )
             );
     return $arrFields;
 }
