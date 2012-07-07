@@ -159,6 +159,7 @@ class paloSantoquotas_user{
         $_DATA  = $_POST;
         unset($_DATA['save_new']);
         unset($_DATA['id']);
+<<<<<<< HEAD
         $query_value = 'INSERT INTO quotas_user (form_id, sex_id, quotas_user_range_id, value) VALUES ';
         $query_value .= "{$_DATA['input_formulario']}, ";
         switch($_DATA){
@@ -196,6 +197,51 @@ class paloSantoquotas_user{
 		}
 		
 		$oD    
+=======
+        $query_value = 'INSERT INTO quotas_user (form_id, sex_id, quotas_user_range_id, value) VALUES (?, ?, ?, ?)';
+        foreach($_DATA as $val){
+	        /*
+	        switch($val){
+			    case '1h':
+			    			$paramSQL = array($_DATA['input_formulario'], )
+			    			$query_value .= "1, ";
+			    			$query_value .= $_DATA['1h'];
+			    			break;
+			    case '1m':
+			    			$query_value .= $_DATA['1h'];
+			    			break;        
+			    case '2h':
+			    			$query_value .= $_DATA['2h'];
+			    			break;
+			    case '2m':
+			    			$query_value .= $_DATA['2m'];
+			    			break;
+			    case '3h':
+			    			$query_value .= $_DATA['3h'];
+			    			break;
+			    case '3m':
+			    			$query_value .= $_DATA['3m'];
+			    			break;
+			    case '4h':
+			    			$query_value .= $_DATA['4h'];
+			    			break;
+			    case '4m':
+			    			$query_value .= $_DATA['4m'];
+			    			break;
+			    case '5h':
+			    			$query_value .= $_DATA['5h'];
+			    			break;
+			    case '5m':
+			    			$query_value .= $_DATA['5m'];
+			    			break;
+	   
+	        }*/
+	        echo $val;
+		}
+		
+//		$oD = $this->obtenerConexion('quotas_db');
+//	    $rs = $oDB->query($query, true, $arrParam);
+>>>>>>> Save info
     }
 }
 ?>
