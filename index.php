@@ -61,63 +61,150 @@ function _moduleContent(&$smarty, $module_name)
     $pDB = "";
 
 
+    $smarty->assign("REQUIRED_FIELD", $arrLang["Required field"]);
+    $smarty->assign("CANCEL", $arrLang["Cancel"]);
+    $smarty->assign("APPLY_CHANGES", $arrLang["Apply changes"]);
+    $smarty->assign("SAVE", $arrLang["Save"]);
+    $smarty->assign("EDIT", $arrLang["Edit"]);
+    $smarty->assign("DELETE", $arrLang["Delete"]);
+
     //actions
     $action = getAction();
     $content = "";
 
+    if (isset($_POST['submit_create_form'])) 
+    	$action = "new_form";
+    elseif (isset($_POST['save_new']))
+	    $action = "save_new";
+    
     switch($action){
         case "save_new":
             $content = saveNewquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
             break;
+        case "view_edit":
+        	$content = viewFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
+        	break;
+        case "new_form":
+        	$content = newFormQuota_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
+        	break;
         default: // view_form
-            $content = viewFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
+            $content = listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
             break;
     }
     return $content;
 }
 
+function listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf)
+{
+    global $arrLang;
+    
+    $pquotas_user = new paloSantoquotas_user($pDB);
+    if(isset($_POST['cbo_estado']))
+    {
+	    
+    }
+	$arrDataForm = $pquotas_user->getquotas_user();
+	
+    $end = count($arrDataForm);
+    
+    $arrData = array();
+    if (is_array($arrDataForm)) {
+        foreach($arrDataForm as $DataForm) {
+            $arrTmp    = array();
+            $arrTmp[0] = $DataForm['form_id'];
+            if($DataForm['status']=='0'){
+                $arrTmp[1] = _tr('Inactive');
+                $arrTmp[2] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
+            } else {
+                $arrTmp[1] = _tr('Active');
+                $arrTmp[2] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
+            }
+            $arrData[] = $arrTmp;
+        }
+
+    }
+    
+    $url = construirUrl(array('menu' => $module_name), array('nav', 'start'));
+    $arrGrid = array("title"    => _tr('Quota List'),
+        "url"      => $url,
+        "icon"     => "images/list.png",
+        "width"    => "99%",
+        "start"    => ($end==0) ? 0 : 1,
+        "end"      => $end,
+        "total"    => $end,
+        "columns"  => array(0 => array("name"	=> _tr('ID Form'),
+                                       "property1"	=> ""),
+                            1 => array("name"	=> _tr('Status'), 
+                                       "property1"	=> ""),
+                            2 => array("name"	=> _tr('Action'),
+                            		   "property1"	=> ""),
+                            )
+      );
+
+    $estados = array("all"=> _tr('All'), "A"=> _tr('Active'), "I"=> _tr('Inactive'));
+//    $combo_estados = "<select name='cbo_estado' id='cbo_estado' onChange='submit();'>".combo($estados,$_POST['cbo_estado'])."</select>";
+
+    $oGrid = new paloSantoGrid($smarty);
+    $oGrid->showFilter(
+              "<table width='100%' border='0'><tr>".
+              "<td><input type='submit' name='submit_create_form' value='"._tr('Create New Quota')."' class='button'></td>".
+//              "<td class='letra12' align='right'><b>"._tr('Status').":</b>&nbsp;$combo_estados</td>".
+              "</tr></table>");
+    $sContenido = $oGrid->fetchGrid($arrGrid, $arrData, $arrLang);
+    if (strpos($sContenido, '<form') === FALSE)
+        $sContenido = "<form  method=\"POST\" style=\"margin-bottom:0;\" action=\"$url\">$sContenido</form>";
+    return $sContenido;
+}
+
 function viewFormquotas_user($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
 {
     $pquotas_user = new paloSantoquotas_user($pDB);
+   	if(isset($_POST['submit_apply_changes'])) 
+	{
+		$exito = update($pquotas_user, $_POST);
+        if ($exito) {
+            header("Location: ?menu=$module_name");
+        } else {
+            $smarty->assign("mb_title", _tr("Validation Error"));
+            $smarty->assign("mb_message", $pquotas_user->errMsg);
+        } 
+	}
+    if (isset($_POST['cancel'])) {
+        Header("Location: ?menu=$module_name");
+        return '';
+    }
     $arrFormquotas_user = createFieldForm();
     $oForm = new paloForm($smarty,$arrFormquotas_user);
-
-    //begin, Form data persistence to errors and other events.
-    $_DATA  = $_POST;
-    $action = getParameter("action");
-    $id     = getParameter("id");
+    $id	= getParameter("id");
     $smarty->assign("ID", $id); //persistence id with input hidden in tpl
-        
-    if($action=="view")
-        $oForm->setViewMode();
-    else if($action=="view_edit" || getParameter("save_edit"))
-        $oForm->setEditMode();
-    //end, Form data persistence to errors and other events.
-
-    if($action=="view" || $action=="view_edit"){ // the action is to view or view_edit.
-        $dataquotas_user = $pquotas_user->getquotas_userById($id);
-        if(is_array($dataquotas_user) & count($dataquotas_user)>0)
-            $_DATA = $dataquotas_user;
-        else{
-            $smarty->assign("mb_title", _tr("Error get Data"));
-            $smarty->assign("mb_message", $pquotas_user->errMsg);
+    $oForm->setEditMode();
+    $arrTmp = array();
+    $formularios = $pquotas_user->obtenerFormularios($id);
+    $dataquotas_user = $pquotas_user->getquotas_userById($id);
+    if(is_array($dataquotas_user) & count($dataquotas_user)>0)
+    {
+        foreach($dataquotas_user[0] as $key => $val)
+        {
+	    	$arrTmp[$key] = $val;   
         }
     }
+    else
+    {
+        $smarty->assign("mb_title", _tr("Error get Data"));
+        $smarty->assign("mb_message", $pquotas_user->errMsg);
+    }
 
-    $formularios = $pquotas_user->obtenerFormularios();
-
-    $smarty->assign("SAVE", _tr("Save"));
-    $smarty->assign("EDIT", _tr("Edit"));
-    $smarty->assign("CANCEL", _tr("Cancel"));
-    $smarty->assign("REQUIRED_FIELD", _tr("Required field"));
-    $smarty->assign("icon", "images/list.png");
-    $smarty->assign("FORMULARIOS", $formularios);
-    
-
-    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas_user"), $_DATA);
-    $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name'>".$htmlForm."</form>";
-
+    $smarty->assign("customer_id",array_keys($formularios));
+    $smarty->assign("cust_options", $formularios);
+    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas_user"), $arrTmp);
+    $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name&action=view_edit&id=$id'>".$htmlForm."</form>";
     return $content;
+}
+
+function update($pquotas_user, $arrPost)
+{
+	$exito = $pquotas_user->updateQuota($arrPost);
+	return $exito;
 }
 
 function saveNewquotas_user($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
@@ -139,96 +226,116 @@ function saveNewquotas_user($smarty, $module_name, $local_templates_dir, &$pDB, 
         $content = viewFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
     }
     else{
-        //NO ERROR, HERE IMPLEMENTATION OF SAVE
-        $content = "Code to save yet undefined.";
-
-
-        exit(0);
+        if(!$pquotas_user->saveInfo($_POST))
+        {
+	     	$content = "UPS!! sorry something is wrong with the query";   
+        }
+        $content = listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
     }
     return $content;
+}
+
+function newFormQuota_user($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
+{
+    $pquotas_user = new paloSantoquotas_user($pDB);
+    $arrFormquotas_user = createFieldForm();
+    $oForm = new paloForm($smarty,$arrFormquotas_user);
+    $formularios = $pquotas_user->obtenerFormularios();
+
+    $smarty->assign("SAVE", _tr("Save"));
+    $smarty->assign("EDIT", _tr("Edit"));
+    $smarty->assign("CANCEL", _tr("Cancel"));
+    $smarty->assign("REQUIRED_FIELD", _tr("Required field"));
+    $smarty->assign("icon", "images/list.png");
+    $smarty->assign("cust_options", $formularios);
+	$_DATA = $_POST;    
+
+    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas_user"), $_DATA);
+    $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name'>".$htmlForm."</form>";
+
+    return $content;
+
 }
 
 function createFieldForm()
 {
     $arrFields = array(
-
-            "1h"   => array(     	"LABEL"                  => _tr("18-24"),
+            "1h"   => array(     			"LABEL"                  => _tr("18-24"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "1m"   => array(      	"LABEL"                  => _tr("18-24"),
+            "1m"   => array(      			"LABEL"                  => _tr("18-24"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "2h"   => array(      "LABEL"                  => _tr("25-32"),
+            "2h"   => array(     			 "LABEL"                  => _tr("25-32"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "2m"   => array(      "LABEL"                  => _tr("25-32"),
+            "2m"   => array(      			"LABEL"                  => _tr("25-32"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "3h"   => array(     "LABEL"                  => _tr("33-40"),
+            "3h"   => array(     			"LABEL"                  => _tr("33-40"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),                                            
-            "3m"   => array(     "LABEL"                  => _tr("33-40"),
+            "3m"   => array(    			 "LABEL"                  => _tr("33-40"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),                                            
-            "4h"   => array(      "LABEL"                  => _tr("41-53"),
+            "4h"   => array(      			"LABEL"                  => _tr("41-53"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "4m"   => array(     "LABEL"                  => _tr("41-53"),
+            "4m"   => array(     			"LABEL"                  => _tr("41-53"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "5h"   => array( "LABEL"                  => _tr("54 y más"),
+            "5h"   => array( 				"LABEL"                  => _tr("54 y más"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "5m"   => array( "LABEL"                  => _tr("54 y más"),
+            "5m"   => array( 				"LABEL"                  => _tr("54 y más"),
                                             "REQUIRED"               => "yes",
                                             "INPUT_TYPE"             => "TEXT",
                                             "INPUT_EXTRA_PARAM"      => "",
                                             "VALIDATION_TYPE"        => "text",
                                             "VALIDATION_EXTRA_PARAM" => ""
                                             ),
-            "input_formulario" 	=>	array(	"LABEL"				=>	_tr("Formulario"),
+            "form_id" 	=>	array(	"LABEL"				=>	_tr("Formulario"),
             								"REQUIRED"				=>	"yes",
             								"INPUT_TYPE"			=>	"SELECT",
             								"VALIDATION_TYPE"		=> "numeric",
                                             "VALIDATION_EXTRA_PARAM" => "",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            )
+                                            "INPUT_EXTRA_PARAM"      => "")
             );
     return $arrFields;
 }
@@ -246,7 +353,7 @@ function getAction()
     else if(getParameter("action")=="view")      //Get parameter by GET (command pattern, links)
         return "view_form";
     else if(getParameter("action")=="view_edit")
-        return "view_form";
+        return "view_edit";
     else
         return "report"; //cancel
 }

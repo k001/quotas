@@ -35,5 +35,14 @@ $arrLangModule=array(
 "Treintaytres" => "33 - 40",
 "Cuarentayuno" => "41 - 53",
 "Cincuentaycuatro" => "54 y mas",
+"Create New Quota" => "Crear nueva cuota",
+"All"	=> "Todos",
+"Actives" => "Activos",
+"Inactives" => "Desactivados",
+"Inactive"	=> "Desactivado",
+"Status"	=> "Estatus",
+"Quota Name" => "Nombre de cuota",
+"ID Form" => "ID Formulario",
+"Quota List"	=> "Listado de cuotas",
 );
 ?>

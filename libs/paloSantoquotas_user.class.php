@@ -73,8 +73,9 @@ class paloSantoquotas_user{
         return $result[0];
     }
 
-    function getquotas_user($limit, $offset, $filter_field, $filter_value)
+    function getQuotas_user($limit = 40, $offset = 0, $filter_field = NULL, $filter_value = NULL)
     {
+	    $oDB = $this->obtenerConexion("quotas_user");
         $where    = "";
         $arrParam = null;
         if(isset($filter_field) & $filter_field !=""){
@@ -82,12 +83,16 @@ class paloSantoquotas_user{
             $arrParam = array("$filter_value%");
         }
 
-        $query   = "SELECT * FROM table $where LIMIT $limit OFFSET $offset";
+        $query = "
+        SELECT qu.form_id AS form_id, qu.status AS status
+        FROM quotas_user AS qu
+        group by form_id
+        $where LIMIT $limit OFFSET $offset";
 
-        $result=$this->_DB->fetchTable($query, true, $arrParam);
+        $result=$oDB->fetchTable($query, true, $arrParam);
 
         if($result==FALSE){
-            $this->errMsg = $this->_DB->errMsg;
+            $this->errMsg = $oDB->errMsg;
             return array();
         }
         return $result;
@@ -95,28 +100,32 @@ class paloSantoquotas_user{
 
     function getquotas_userById($id)
     {
-        $query = "SELECT * FROM table WHERE id=?";
-
-        $result=$this->_DB->getFirstRowQuery($query, true, array("$id"));
+        $query = "SELECT * FROM quotas_user WHERE form_id=?";
+        $oDB = $this->obtenerConexion("quotas_user");
+        $result=$oDB->fetchTable($query, true, array("$id"));
 
         if($result==FALSE){
-            $this->errMsg = $this->_DB->errMsg;
+            $this->errMsg = $oDB->errMsg;
             return null;
         }
         return $result;
     }
     
-    function obtenerFormularios()
-    {
+    function obtenerFormularios($id = 0)
+    { 
     	$arrParam = null;
-	    $query = "SELECT id, nombre FROM form";
-	    $oDB = $this->obtenerConexion("call_center");
-	    
+	    $where = "";
+    	if($id != 0)
+    	{
+	    	$where = "WHERE id = {$id}";
+    	}
+	    $query = "SELECT id AS form_id, nombre FROM form $where";
+	    $oDB = $this->obtenerConexion("call_center");	    
 	    $rs = $oDB->fetchTable($query, true, $arrParam);
 	    if (!is_array($rs)) die('(internal) Cannot list agents - '.$oDB->errMsg);
         $listaFormularios = array();
         foreach ($rs as $tupla) {
-            $listaFormularios[$tupla['id']] = $tupla['nombre'];
+            $listaFormularios[$tupla['form_id']] = $tupla['nombre'];
         }
         return $listaFormularios;
     }
@@ -156,92 +165,48 @@ class paloSantoquotas_user{
     
     function saveInfo($arrParam)
     {
-        $_DATA  = $_POST;
-        unset($_DATA['save_new']);
-        unset($_DATA['id']);
-<<<<<<< HEAD
-        $query_value = 'INSERT INTO quotas_user (form_id, sex_id, quotas_user_range_id, value) VALUES ';
-        $query_value .= "{$_DATA['input_formulario']}, ";
-        switch($_DATA){
-		    case '1h':
-		    			$query_value .= "1, ";
-		    			$query_value .= $_DATA['1h'];
-		    			break;
-		    case '1m':
-		    			$query_value .= $_DATA['1h'];
-		    			break;        
-		    case '2h':
-		    			$query_value .= $_DATA['2h'];
-		    			break;
-		    case '2m':
-		    			$query_value .= $_DATA['2m'];
-		    			break;
-		    case '3h':
-		    			$query_value .= $_DATA['3h'];
-		    			break;
-		    case '3m':
-		    			$query_value .= $_DATA['3m'];
-		    			break;
-		    case '4h':
-		    			$query_value .= $_DATA['4h'];
-		    			break;
-		    case '4m':
-		    			$query_value .= $_DATA['4m'];
-		    			break;
-		    case '5h':
-		    			$query_value .= $_DATA['5h'];
-		    			break;
-		    case '5m':
-		    			$query_value .= $_DATA['5m'];
-		    			break;
+        $paramSQL = $arrParam;
+        unset($paramSQL['save_new']);
+        unset($paramSQL['id']);
+        $paramSQL['form_id'] = $paramSQL['customer_id'];
+        unset($paramSQL['customer_id']);
+        $oDB = $this->obtenerConexion("quotas_user");
+        if (!empty($paramSQL))
+        {
+	        $query = $oDB->construirInsert("quotas_user", $paramSQL);
+	        $result = $oDB->genQuery($query);
+	        if (!$result) 
+	        {
+	            $this->errMsg = $oDB->errMsg;
+	            return false;
+	        }
+       	    return true;
+	    }
+	    return false;
+	}
+	
+	function updateQuota($arrPost)
+	{
+		$paramSQL = $arrPost;
+		$id = $paramSQL['customer_id'];
+		unset($paramSQL['customer_id']);
+		unset($paramSQL['submit_apply_changes']);
+		unset($paramSQL['id']);
+		$oDB = $this->obtenerConexion("quotas_user");
+		if (!empty($paramSQL))
+		{
+			$query = $oDB->construirUpdate("quotas_user", $paramSQL, "form_id = $id");
+			$result = $oDB->genQuery($query);
+			if (!$result)
+			{
+				$this->errMsg = $oDB->errMsg;
+				return false;
+			}
+			return true;
 		}
-		
-		$oD    
-=======
-        $query_value = 'INSERT INTO quotas_user (form_id, sex_id, quotas_user_range_id, value) VALUES (?, ?, ?, ?)';
-        foreach($_DATA as $val){
-	        /*
-	        switch($val){
-			    case '1h':
-			    			$paramSQL = array($_DATA['input_formulario'], )
-			    			$query_value .= "1, ";
-			    			$query_value .= $_DATA['1h'];
-			    			break;
-			    case '1m':
-			    			$query_value .= $_DATA['1h'];
-			    			break;        
-			    case '2h':
-			    			$query_value .= $_DATA['2h'];
-			    			break;
-			    case '2m':
-			    			$query_value .= $_DATA['2m'];
-			    			break;
-			    case '3h':
-			    			$query_value .= $_DATA['3h'];
-			    			break;
-			    case '3m':
-			    			$query_value .= $_DATA['3m'];
-			    			break;
-			    case '4h':
-			    			$query_value .= $_DATA['4h'];
-			    			break;
-			    case '4m':
-			    			$query_value .= $_DATA['4m'];
-			    			break;
-			    case '5h':
-			    			$query_value .= $_DATA['5h'];
-			    			break;
-			    case '5m':
-			    			$query_value .= $_DATA['5m'];
-			    			break;
-	   
-	        }*/
-	        echo $val;
-		}
-		
-//		$oD = $this->obtenerConexion('quotas_db');
-//	    $rs = $oDB->query($query, true, $arrParam);
->>>>>>> Save info
-    }
+		return false;
+	}
+
+
 }
 ?>
