@@ -1,8 +1,8 @@
 <?php
-  /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
+/* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:
   Codificación: UTF-8
   +----------------------------------------------------------------------+
-  | Elastix version 2.3.0-6                                               |
+  | Elastix version 0.5                                                  |
   | http://www.elastix.org                                               |
   +----------------------------------------------------------------------+
   | Copyright (c) 2006 Palosanto Solutions S. A.                         |
@@ -25,334 +25,322 @@
   | The Original Code is: Elastix Open Source.                           |
   | The Initial Developer of the Original Code is PaloSanto Solutions    |
   +----------------------------------------------------------------------+
-  $Id: index.php,v 1.1 2012-05-12 09:05:11 Ivan Zenteno ivan.zenteno@infapen.com Exp $ */
-//include elastix framework
+  $Id: data_fom $ */
+
+require_once "libs/paloSantoForm.class.php";
+require_once "libs/paloSantoTrunk.class.php";
 include_once "libs/paloSantoGrid.class.php";
-include_once "libs/paloSantoForm.class.php";
+require_once "libs/misc.lib.php";
+require_once "libs/xajax/xajax.inc.php";
+
+require_once "modules/agent_console/libs/elastix2.lib.php";
 
 function _moduleContent(&$smarty, $module_name)
 {
     //include module files
     include_once "modules/$module_name/configs/default.conf.php";
-    include_once "modules/$module_name/libs/paloSantoquotas_user.class.php";
 
-    //include file language agree to elastix configuration
-    //if file language not exists, then include language by default (en)
-    $lang=get_language();
-    $base_dir=dirname($_SERVER['SCRIPT_FILENAME']);
-    $lang_file="modules/$module_name/lang/$lang.lang";
-    if (file_exists("$base_dir/$lang_file")) include_once "$lang_file";
-    else include_once "modules/$module_name/lang/en.lang";
-
-    //global variables
     global $arrConf;
-    global $arrConfModule;
+/*
     global $arrLang;
-    global $arrLangModule;
-    $arrConf = array_merge($arrConf,$arrConfModule);
-    $arrLang = array_merge($arrLang,$arrLangModule);
 
+    #incluir el archivo de idioma de acuerdo al que este seleccionado
+    #si el archivo de idioma no existe incluir el idioma por defecto
+    $lang=get_language();
+
+    $script_dir=dirname($_SERVER['SCRIPT_FILENAME']);
+
+    // Include language file for EN, then for local, and merge the two.
+    include_once("modules/$module_name/lang/en.lang");
+    $lang_file="modules/$module_name/lang/$lang.lang";
+    if (file_exists("$script_dir/$lang_file")) {
+        $arrLangModuleEN = $arrLangModule;
+        include_once($lang_file);
+        $arrLangModule = array_merge($arrLangModuleEN, $arrLangModule);
+    }
+*/
+    load_language_module($module_name);
+
+    require_once "modules/$module_name/libs/paloSantoDataForm.class.php";
     //folder path for custom templates
-    $templates_dir=(isset($arrConf['templates_dir']))?$arrConf['templates_dir']:'themes';
+    $base_dir=dirname($_SERVER['SCRIPT_FILENAME']);
+    $templates_dir=(isset($arrConfig['templates_dir']))?$arrConfig['templates_dir']:'themes';
     $local_templates_dir="$base_dir/modules/$module_name/".$templates_dir.'/'.$arrConf['theme'];
 
-    //conexion resource
-    //$pDB = new paloDB($arrConf['dsn_conn_database']);
-    $pDB = "";
+
+    // Definición del formulario de nueva formulario
+    $smarty->assign("MODULE_NAME", $module_name);
+    $smarty->assign("REQUIRED_FIELD", _tr('Required field'));
+    $smarty->assign("CANCEL", _tr('Cancel'));
+    $smarty->assign("APPLY_CHANGES", _tr('Apply changes'));
+    $smarty->assign("SAVE", _tr('Save'));
+    $smarty->assign("EDIT", _tr('Edit'));
+    $smarty->assign("DESCATIVATE", _tr('Desactivate'));
+    $smarty->assign("DELETE", _tr('Delete'));
+    $smarty->assign("CONFIRM_CONTINUE", _tr('Are you sure you wish to continue?'));
+    $smarty->assign("new_field", _tr('New Field'));
+    $smarty->assign("add_field", _tr('Add Field'));
+    $smarty->assign("update_field", _tr('Update Field')); 
+    $smarty->assign("CONFIRM_DELETE", _tr('Are you sure you wish to delete form?'));
+   
+// print_r($_POST);
+
+    //Definicion de campos
+    $formCampos = array(
+        'form_nombre'    =>    array(
+            "LABEL"                => _tr('Form Name'),
+            "REQUIRED"               => "yes",
+            "INPUT_TYPE"             => "TEXT",
+            "INPUT_EXTRA_PARAM"      => array("size" => "60"),
+            "VALIDATION_TYPE"        => "text",
+            "VALIDATION_EXTRA_PARAM" => "",
+        ),
+        'form_description'    =>    array(
+            "LABEL"                => _tr('Form Description'),
+            "REQUIRED"               => "no",
+            "INPUT_TYPE"             => "TEXTAREA",
+            "INPUT_EXTRA_PARAM"      => "",
+            "VALIDATION_TYPE"        => "text",
+            "VALIDATION_EXTRA_PARAM" => "",
+            "COLS"                   => "33",
+            "ROWS"                   => "2",
+        ),
+        'field_nombre'    =>    array(
+            "LABEL"                => _tr('Field Name'),
+            "REQUIRED"               => "yes",
+            "INPUT_TYPE"             => "TEXTAREA",
+            "INPUT_EXTRA_PARAM"      => "",
+            "VALIDATION_TYPE"        => "text",
+            "VALIDATION_EXTRA_PARAM" => "",
+            "COLS"                   => "50",
+            "ROWS"                   => "2",
+        ),
+        "order" => array(
+            "LABEL"                  => _tr('Order'),
+            "REQUIRED"               => "yes",
+            "INPUT_TYPE"             => "TEXT",
+            "INPUT_EXTRA_PARAM"      => array("size" => "3"),
+            "VALIDATION_TYPE"        => "numeric",
+            "VALIDATION_EXTRA_PARAM" => ""
+        ), 
+    );
+    $smarty->assign("type", _tr('Type'));    
+    $smarty->assign("select_type","type"); 
+
+    $arr_type = array(
+        "VALUE" => array (
+                    "TEXT",
+                    "LIST",
+                    "DATE",
+                    "TEXTAREA",
+                    "LABEL",
+                    ),
+        "NAME"  => array (
+                    _tr('Type Text'),
+                    _tr('Type List'),
+                    _tr('Type Date'),
+                    _tr('Type Text Area'),
+                    _tr('Type Label'),
+                    ),
+        "SELECTED" => "TEXT",     
+        );
 
 
-    $smarty->assign("REQUIRED_FIELD", $arrLang["Required field"]);
-    $smarty->assign("CANCEL", $arrLang["Cancel"]);
-    $smarty->assign("APPLY_CHANGES", $arrLang["Apply changes"]);
-    $smarty->assign("SAVE", $arrLang["Save"]);
-    $smarty->assign("EDIT", $arrLang["Edit"]);
-    $smarty->assign("DELETE", $arrLang["Delete"]);
+    $smarty->assign("option_type", $arr_type); 
+    $smarty->assign("item_list", _tr('List Item'));
+    $smarty->assign("agregar", _tr('Add Item')); 
+    $smarty->assign("quitar", _tr('Remove Item')); 
+    $oForm = new paloForm($smarty, $formCampos);     
+// print_r($_SESSION['ayuda']);
+    $xajax = new xajax();
+    $xajax->registerFunction("agregar_campos_formulario");
+    $xajax->registerFunction("cancelar_formulario_ingreso");
+    $xajax->registerFunction("guardar_formulario");
+    $xajax->registerFunction("eliminar_campos_formulario");
+    $xajax->registerFunction("editar_campo_formulario");
+    $xajax->registerFunction("update_campo_formulario");
+    $xajax->registerFunction("cancel_campo_formulario");
+    $xajax->registerFunction("desactivar_formulario");
 
-    //actions
-    $action = getAction();
-    $content = "";
+    $xajax->processRequests();
+    $smarty->assign("xajax_javascript",$xajax->printJavascript("libs/xajax/"));
 
-    if (isset($_POST['submit_create_form'])) 
-    	$action = "new_form";
-    elseif (isset($_POST['save_new']))
-	    $action = "save_new";
-    
-    switch($action){
-        case "save_new":
-            $content = saveNewquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
-            break;
-        case "view_edit":
-        	$content = viewFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
-        	break;
-        case "new_form":
-        	$content = newFormQuota_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
-        	break;
-        default: // view_form
-            $content = listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
-            break;
+
+    $pDB = new paloDB($arrConf['cadena_dsn']);
+    if (!is_object($pDB->conn) || $pDB->errMsg!="") {
+        $smarty->assign("mb_message", _tr('Error when connecting to database')." ".$pDB->errMsg);
     }
-    return $content;
+    if (isset($_POST['submit_create_form'])) {
+        $contenidoModulo = new_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm); 
+    } else if (isset($_POST['edit'])) {
+        $contenidoModulo = edit_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm);
+    } else if (isset($_POST['delete'])) {
+        $contenidoModulo = delete_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm);
+    } else if (isset($_GET['id']) && isset($_GET['action']) && $_GET['action']=="view") {
+        $contenidoModulo = view_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm); 
+    } else if (isset($_GET['id']) && isset($_GET['action']) && $_GET['action']=="activar") {
+        $contenidoModulo = activar_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm); 
+    } else {
+        $contenidoModulo = listadoForm($pDB, $smarty, $module_name, $local_templates_dir); 
+    }
+
+    return $contenidoModulo;
 }
 
-function listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf)
-{
-    global $arrLang;
-    
-    $pquotas_user = new paloSantoquotas_user($pDB);
-    if(isset($_POST['cbo_estado']))
-    {
-	    
+
+function new_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm) {
+    $oDataForm = new paloSantoDataForm($pDB);
+    $id_nuevo_formulario = $oDataForm->proximo_id_formulario();
+    $smarty->assign('FRAMEWORK_TIENE_TITULO_MODULO', existeSoporteTituloFramework());
+    $smarty->assign("id_formulario_actual",$id_nuevo_formulario); // obtengo el id para crear el nuevo formulario
+    $smarty->assign('icon', 'images/kfaxview.png');
+    $contenidoModulo = $oForm->fetchForm("$local_templates_dir/form.tpl", _tr('New Form'),$_POST);  
+    return $contenidoModulo;
+}
+
+function view_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm) {
+    $smarty->assign('FRAMEWORK_TIENE_TITULO_MODULO', existeSoporteTituloFramework());
+
+    $oForm->setViewMode(); // Esto es para activar el modo "preview"
+
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        return false;
     }
-	$arrDataForm = $pquotas_user->getquotas_user();
-	
-    $end = count($arrDataForm);
+    $oDataForm = new paloSantoDataForm($pDB);
+    $arrDataForm = $oDataForm->getFormularios($_GET['id']);
+    $arrFieldForm = $oDataForm->obtener_campos_formulario($_GET['id']);
     
+    // Conversion de formato
+    $arrTmp['form_nombre']       = $arrDataForm[0]['nombre'];
+    $arrTmp['form_description']    = $arrDataForm[0]['descripcion'];  
+
+    $smarty->assign("id_formulario_actual", $_GET['id']);
+    $smarty->assign("style_field","style='display:none;'");
+    $html_campos = html_campos_formulario($arrFieldForm,false);
+    $smarty->assign("solo_contenido_en_vista",$html_campos);
+    $smarty->assign('icon', 'images/kfaxview.png');
+    $contenidoModulo=$oForm->fetchForm("$local_templates_dir/form.tpl", _tr('View Form'), $arrTmp); // hay que pasar el arreglo
+    return $contenidoModulo;
+}
+
+function edit_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm) {
+    $smarty->assign('FRAMEWORK_TIENE_TITULO_MODULO', existeSoporteTituloFramework());
+
+    // Tengo que recuperar los datos del formulario
+    $oDataForm = new paloSantoDataForm($pDB);
+    $arrDataForm = $oDataForm->getFormularios($_GET['id']); 
+    $arrFieldForm = $oDataForm->obtener_campos_formulario($_GET['id']);
+
+    $arrTmp['form_nombre']       = $arrDataForm[0]['nombre'];
+    $arrTmp['form_description']    = $arrDataForm[0]['descripcion'];   
+
+    $oForm = new paloForm($smarty, $formCampos);
+    $oForm->setEditMode();
+    $smarty->assign("id_formulario_actual", $_GET['id']);
+    $html_campos = html_campos_formulario($arrFieldForm);
+    $smarty->assign("solo_contenido_en_vista",$html_campos);
+    $smarty->assign('icon', 'images/kfaxview.png');
+    $contenidoModulo=$oForm->fetchForm("$local_templates_dir/form.tpl", _tr('Edit Form')." \"".$arrTmp['form_nombre']."\"", $arrTmp);
+    return $contenidoModulo;
+}
+
+function listadoForm($pDB, $smarty, $module_name, $local_templates_dir) {
+    global $arrLang;
+
+    $oDataForm = new paloSantoDataForm($pDB);
+    // preguntando por el estado del filtro
+    if (!isset($_POST['cbo_estado']) || $_POST['cbo_estado']=="") {
+        $_POST['cbo_estado'] = "A";
+    }
+    $arrDataForm = $oDataForm->getFormularios(NULL, $_POST['cbo_estado']);
+    $end = count($arrDataForm);
+
     $arrData = array();
     if (is_array($arrDataForm)) {
         foreach($arrDataForm as $DataForm) {
             $arrTmp    = array();
-            $arrTmp[0] = $DataForm['form_id'];
-            if($DataForm['status']=='0'){
-                $arrTmp[1] = _tr('Inactive');
-                $arrTmp[2] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
-            } else {
-                $arrTmp[1] = _tr('Active');
-                $arrTmp[2] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
+            $arrTmp[0] = $DataForm['nombre'];
+            if(!isset($DataForm['descripcion']) || $DataForm['descripcion']=="")
+                $DataForm['descripcion']="&nbsp;";
+            $arrTmp[1] = $DataForm['descripcion'];
+            if($DataForm['estatus']=='I'){
+                $arrTmp[2] = _tr('Inactive');
+                $arrTmp[3] = "&nbsp;<a href='?menu=$module_name&action=activar&id=".$DataForm['id']."'>"._tr('Activate')."</a>";
+            }
+            else{
+                $arrTmp[2] = _tr('Active');
+                $arrTmp[3] = "&nbsp;<a href='?menu=$module_name&action=view&id=".$DataForm['id']."'>"._tr('View')."</a>";
             }
             $arrData[] = $arrTmp;
         }
-
     }
-    
+
     $url = construirUrl(array('menu' => $module_name), array('nav', 'start'));
-    $arrGrid = array("title"    => _tr('Quota List'),
+    $arrGrid = array("title"    => _tr('Form List'),
         "url"      => $url,
         "icon"     => "images/list.png",
         "width"    => "99%",
         "start"    => ($end==0) ? 0 : 1,
         "end"      => $end,
         "total"    => $end,
-        "columns"  => array(0 => array("name"	=> _tr('ID Form'),
-                                       "property1"	=> ""),
-                            1 => array("name"	=> _tr('Status'), 
-                                       "property1"	=> ""),
-                            2 => array("name"	=> _tr('Action'),
-                            		   "property1"	=> ""),
-                            )
-      );
+        "columns"  => array(0 => array("name"      => _tr('Form Name'),
+                                       "property1" => ""),
+                            1 => array("name"      => _tr('Form Description'), 
+                                       "property1" => ""),
+                            2 => array("name"      => _tr('Status'), 
+                                       "property1" => ""),
+                            3 => array("name"      => _tr('Options'), 
+                                       "property1" => "")));
 
     $estados = array("all"=> _tr('All'), "A"=> _tr('Active'), "I"=> _tr('Inactive'));
-
+    $combo_estados = "<select name='cbo_estado' id='cbo_estado' onChange='submit();'>".combo($estados,$_POST['cbo_estado'])."</select>";
     $oGrid = new paloSantoGrid($smarty);
     $oGrid->showFilter(
               "<table width='100%' border='0'><tr>".
-              "<td><input type='submit' name='submit_create_form' value='"._tr('Create New Quota')."' class='button'></td>".
+              "<td><input type='submit' name='submit_create_form' value='"._tr('Create New Form')."' class='button'></td>".
+              "<td class='letra12' align='right'><b>"._tr('Status').":</b>&nbsp;$combo_estados</td>".
               "</tr></table>");
+//print_r($arrData);
     $sContenido = $oGrid->fetchGrid($arrGrid, $arrData, $arrLang);
     if (strpos($sContenido, '<form') === FALSE)
         $sContenido = "<form  method=\"POST\" style=\"margin-bottom:0;\" action=\"$url\">$sContenido</form>";
     return $sContenido;
 }
 
-function viewFormquotas_user($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
+function activar_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm)
 {
-    $pquotas_user = new paloSantoquotas_user($pDB);
-   	if(isset($_POST['submit_apply_changes'])) 
-	{
-		$exito = update($pquotas_user, $_POST);
-        if ($exito) {
-            header("Location: ?menu=$module_name");
+     if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        return false;
+    }
+    $oDataForm = new paloSantoDataForm($pDB);
+    if($oDataForm->activar_formulario($_GET['id']))
+        header("Location: ?menu=$module_name");
+    else
+    {
+        $smarty->assign("mb_title", _tr('Activate Error'));
+        $smarty->assign("mb_message", _tr('Error when Activating the form'));
+    }
+}
+
+function delete_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm) {
+    if (!isset($_POST['id_formulario']) || !is_numeric($_POST['id_formulario'])) {
+        return false;
+    }
+
+    $oDataForm = new paloSantoDataForm($pDB);
+    if($oDataForm->delete_form($_POST['id_formulario'])) {
+        if ($oDataForm->errMsg!="") {
+            $smarty->assign("mb_title", _tr('Validation Error'));
+            $smarty->assign("mb_message",$oDataForm->errMsg);
         } else {
-            $smarty->assign("mb_title", _tr("Validation Error"));
-            $smarty->assign("mb_message", $pquotas_user->errMsg);
-        } 
-	}
-    if (isset($_POST['cancel'])) {
-        Header("Location: ?menu=$module_name");
-        return '';
-    }
-    $arrFormquotas_user = createFieldForm();
-    $oForm = new paloForm($smarty,$arrFormquotas_user);
-    $id	= getParameter("id");
-    $smarty->assign("ID", $id); //persistence id with input hidden in tpl
-    $oForm->setEditMode();
-    $arrTmp = array();
-    $formularios = $pquotas_user->obtenerFormularios($id);
-    $dataquotas_user = $pquotas_user->getquotas_userById($id);
-    if(is_array($dataquotas_user) & count($dataquotas_user)>0)
-    {
-        foreach($dataquotas_user[0] as $key => $val)
-        {
-	    	$arrTmp[$key] = $val;   
+            header("Location: ?menu=form_designer");
         }
+    } else {
+        $msg_error = ($oDataForm->errMsg!="")?"<br>".$oDataForm->errMsg:"";
+        $smarty->assign("mb_title", _tr('Delete Error'));
+        $smarty->assign("mb_message", _tr('Error when deleting the Form').$msg_error);
     }
-    else
-    {
-        $smarty->assign("mb_title", _tr("Error get Data"));
-        $smarty->assign("mb_message", $pquotas_user->errMsg);
-    }
-
-    $smarty->assign("customer_id",array_keys($formularios));
-    $smarty->assign("cust_options", $formularios);
-    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas_user"), $arrTmp);
-    $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name&action=view_edit&id=$id'>".$htmlForm."</form>";
-    return $content;
-}
-
-function update($pquotas_user, $arrPost)
-{
-	$exito = $pquotas_user->updateQuota($arrPost);
-	return $exito;
-}
-
-function saveNewquotas_user($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
-{
-    $pquotas_user = new paloSantoquotas_user($pDB);
-    $arrFormquotas_user = createFieldForm();
-    $oForm = new paloForm($smarty,$arrFormquotas_user);
-
-    if(!$oForm->validateForm($_POST)){
-        // Validation basic, not empty and VALIDATION_TYPE 
-        $smarty->assign("mb_title", _tr("Validation Error"));
-        $arrErrores = $oForm->arrErroresValidacion;
-        $strErrorMsg = "<b>"._tr("The following fields contain errors").":</b><br/>";
-        if(is_array($arrErrores) && count($arrErrores) > 0){
-            foreach($arrErrores as $k=>$v)
-                $strErrorMsg .= "$k, ";
-        }
-        $smarty->assign("mb_message", $strErrorMsg);
-        $content = viewFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
-    }
-    else{
-        if(!$pquotas_user->saveInfo($_POST))
-        {
-	     	$content = "UPS!! sorry something is wrong with the query";   
-        }
-        $content = listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, $arrConf);
-    }
-    return $content;
-}
-
-function newFormQuota_user($smarty, $module_name, $local_templates_dir, &$pDB, $arrConf)
-{
-    $pquotas_user = new paloSantoquotas_user($pDB);
-    $arrFormquotas_user = createFieldForm();
-    $oForm = new paloForm($smarty,$arrFormquotas_user);
-    $formularios = $pquotas_user->obtenerFormularios();
-
-    $smarty->assign("SAVE", _tr("Save"));
-    $smarty->assign("EDIT", _tr("Edit"));
-    $smarty->assign("CANCEL", _tr("Cancel"));
-    $smarty->assign("REQUIRED_FIELD", _tr("Required field"));
-    $smarty->assign("icon", "images/list.png");
-    $smarty->assign("cust_options", $formularios);
-	$_DATA = $_POST;    
-
-    $htmlForm = $oForm->fetchForm("$local_templates_dir/form.tpl",_tr("quotas_user"), $_DATA);
-    $content = "<form  method='POST' style='margin-bottom:0;' action='?menu=$module_name'>".$htmlForm."</form>";
-
-    return $content;
-
-}
-
-function createFieldForm()
-{
-    $arrFields = array(
-            "1h"   => array(     			"LABEL"                  => _tr("18-24"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "1m"   => array(      			"LABEL"                  => _tr("18-24"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "2h"   => array(     			 "LABEL"                  => _tr("25-32"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "2m"   => array(      			"LABEL"                  => _tr("25-32"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "3h"   => array(     			"LABEL"                  => _tr("33-40"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),                                            
-            "3m"   => array(    			 "LABEL"                  => _tr("33-40"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),                                            
-            "4h"   => array(      			"LABEL"                  => _tr("41-53"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "4m"   => array(     			"LABEL"                  => _tr("41-53"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "5h"   => array( 				"LABEL"                  => _tr("54 y más"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "5m"   => array( 				"LABEL"                  => _tr("54 y más"),
-                                            "REQUIRED"               => "yes",
-                                            "INPUT_TYPE"             => "TEXT",
-                                            "INPUT_EXTRA_PARAM"      => "",
-                                            "VALIDATION_TYPE"        => "text",
-                                            "VALIDATION_EXTRA_PARAM" => ""
-                                            ),
-            "form_id" 	=>	array(	"LABEL"				=>	_tr("Formulario"),
-            								"REQUIRED"				=>	"yes",
-            								"INPUT_TYPE"			=>	"SELECT",
-            								"VALIDATION_TYPE"		=> "numeric",
-                                            "VALIDATION_EXTRA_PARAM" => "",
-                                            "INPUT_EXTRA_PARAM"      => "")
-            );
-    return $arrFields;
-}
-
-function getAction()
-{
-    if(getParameter("save_new")) //Get parameter by POST (submit)
-        return "save_new";
-    else if(getParameter("save_edit"))
-        return "save_edit";
-    else if(getParameter("delete")) 
-        return "delete";
-    else if(getParameter("new_open")) 
-        return "view_form";
-    else if(getParameter("action")=="view")      //Get parameter by GET (command pattern, links)
-        return "view_form";
-    else if(getParameter("action")=="view_edit")
-        return "view_edit";
-    else
-        return "report"; //cancel
+    $sContenido = view_form($pDB, $smarty, $module_name, $local_templates_dir, $formCampos, $oForm);
+    return $sContenido;
 }
 ?>

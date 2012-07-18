@@ -85,26 +85,43 @@ class paloSantoquotas_user{
         
         $oDB2 = $this->obtenerConexion("call_center");
         $query = "select id, nombre from form";
-        $result = $oDB2->fechTable($query, true);
-        foreach($result as $k => $v)
+        $forms = $oDB2->fetchTable($query, true);
+        $form = array();
+        foreach($forms as $k => $v)
         {
-	        echo $v;
+	        $form[$k] = $v;
         }
         
-        exit();
-
         $query = "
         SELECT qu.form_id AS form_id, qu.status AS status
         FROM quotas_user AS qu
         group by form_id
         $where LIMIT $limit OFFSET $offset";
 
-        $result=$oDB->fetchTable($query, true, $arrParam);
+        $quotas = $oDB->fetchTable($query, true, $arrParam);
 
-        if($result==FALSE){
+        if($quotas == FALSE){
             $this->errMsg = $oDB->errMsg;
             return array();
         }
+        
+        $quota = array();
+                
+        $c = 0;
+        foreach($quotas as $key => $val)
+        {
+        	foreach($form as $k => $v)
+        	{
+        		if($quotas[$c]['form_id'] ==  $v['id'])
+        		{
+	        		$quota[$c]['form_id'] = $quotas[$c]['form_id'];
+	        		$quota[$c]['form_name'] = $v['nombre'];
+	        		$quota[$c]['status'] = $quotas[$c]['status'];
+        		}
+        	}
+	        $c++;
+        }
+        $result = $quota;        
         return $result;
     }
 
@@ -203,11 +220,34 @@ class paloSantoquotas_user{
 		unset($paramSQL['submit_apply_changes']);
 		unset($paramSQL['id']);
 		$oDB = $this->obtenerConexion("quotas_user");
-		if (!empty($paramSQL))
+		if(!empty($paramSQL))
 		{
 			$query = $oDB->construirUpdate("quotas_user", $paramSQL, "form_id = $id");
 			$result = $oDB->genQuery($query);
 			if (!$result)
+			{
+				$this->errMsg = $oDB->errMsg;
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	function deleteQuota($arrPost)
+	{
+		$paramSQL = $arrPost;
+		$id = $paramSQL['customer_id'];
+		unset($paramSQL['customer_id']);
+		unset($paramSQL['delete_quota']);
+		unset($paramSQL['id']);
+		
+		$oDB = $this->obtenerConexion("quotas_user");
+		if(!empty($paramSQL))
+		{
+			$query = "DELETE FROM quotas_user WHERE form_id = ".$id;
+			$rs = $oDB->genQuery($query);
+			if(!$rs)
 			{
 				$this->errMsg = $oDB->errMsg;
 				return false;
