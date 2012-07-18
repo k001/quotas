@@ -13,7 +13,6 @@
         <td align="left">
             <input class="button" type="submit" name="submit_apply_changes" value="{$APPLY_CHANGES}">
             <input class="button" type="submit" name="cancel" value="{$CANCEL}">
-            <input class="button" type="submit" name="delete_quota" value="{$DELETE}"  onClick="return confirmSubmit('{$CONFIRM_DELETE}');">
         </td>
         {/if}
         <td align="right" nowrap><span class="letra12"><span  class="required">*</span> {$REQUIRED_FIELD}</span></td>

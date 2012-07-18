@@ -59,7 +59,10 @@ function _moduleContent(&$smarty, $module_name)
     //conexion resource
     //$pDB = new paloDB($arrConf['dsn_conn_database']);
     $pDB = "";
+<<<<<<< HEAD
 
+=======
+>>>>>>> Revert "Borrado y confirmacion, nombre de formulario en lugar de ID"
 
     $smarty->assign("REQUIRED_FIELD", $arrLang["Required field"]);
     $smarty->assign("CANCEL", $arrLang["Cancel"]);
@@ -69,6 +72,16 @@ function _moduleContent(&$smarty, $module_name)
     $smarty->assign("DELETE", $arrLang["Delete"]);
     $smarty->assign("CONFIRM_DELETE", _tr('Are you sure you wish to delete form?'));
 
+<<<<<<< HEAD
+=======
+    $smarty->assign("REQUIRED_FIELD", $arrLang["Required field"]);
+    $smarty->assign("CANCEL", $arrLang["Cancel"]);
+    $smarty->assign("APPLY_CHANGES", $arrLang["Apply changes"]);
+    $smarty->assign("SAVE", $arrLang["Save"]);
+    $smarty->assign("EDIT", $arrLang["Edit"]);
+    $smarty->assign("DELETE", $arrLang["Delete"]);
+
+>>>>>>> Revert "Borrado y confirmacion, nombre de formulario en lugar de ID"
     //actions
     $action = getAction();
     $content = "";
@@ -112,6 +125,7 @@ function listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, 
     if (is_array($arrDataForm)) {
         foreach($arrDataForm as $DataForm) {
             $arrTmp    = array();
+<<<<<<< HEAD
             $arrTmp[0] = $DataForm['form_name'];
             if($DataForm['status']=='0'){
 /*                 $arrTmp[1] = _tr('Inactive'); */
@@ -119,6 +133,15 @@ function listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, 
             } else {
 /*                 $arrTmp[1] = _tr('Active'); */
                 $arrTmp[1] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
+=======
+            $arrTmp[0] = $DataForm['form_id'];
+            if($DataForm['status']=='0'){
+                $arrTmp[1] = _tr('Inactive');
+                $arrTmp[2] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
+            } else {
+                $arrTmp[1] = _tr('Active');
+                $arrTmp[2] = "&nbsp;<a href='?menu=$module_name&action=view_edit&id=".$DataForm['form_id']."'>"._tr('Edit')."</a>";
+>>>>>>> Revert "Borrado y confirmacion, nombre de formulario en lugar de ID"
             }
             $arrData[] = $arrTmp;
         }
@@ -135,11 +158,17 @@ function listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, 
         "total"    => $end,
         "columns"  => array(0 => array("name"	=> _tr('ID Form'),
                                        "property1"	=> ""),
+<<<<<<< HEAD
 /*
                             1 => array("name"	=> _tr('Status'), 
                                        "property1"	=> ""),
 */
                             1 => array("name"	=> _tr('Action'),
+=======
+                            1 => array("name"	=> _tr('Status'), 
+                                       "property1"	=> ""),
+                            2 => array("name"	=> _tr('Action'),
+>>>>>>> Revert "Borrado y confirmacion, nombre de formulario en lugar de ID"
                             		   "property1"	=> ""),
                             )
       );
