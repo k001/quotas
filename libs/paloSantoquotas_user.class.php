@@ -82,6 +82,16 @@ class paloSantoquotas_user{
             $where    = "where $filter_field like ?";
             $arrParam = array("$filter_value%");
         }
+        
+        $oDB2 = $this->obtenerConexion("call_center");
+        $query = "select id, nombre from form";
+        $result = $oDB2->fechTable($query, true);
+        foreach($result as $k => $v)
+        {
+	        echo $v;
+        }
+        
+        exit();
 
         $query = "
         SELECT qu.form_id AS form_id, qu.status AS status

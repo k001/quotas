@@ -142,13 +142,11 @@ function listFormquotas_user($smarty, $module_name, $local_templates_dir, $pDB, 
       );
 
     $estados = array("all"=> _tr('All'), "A"=> _tr('Active'), "I"=> _tr('Inactive'));
-//    $combo_estados = "<select name='cbo_estado' id='cbo_estado' onChange='submit();'>".combo($estados,$_POST['cbo_estado'])."</select>";
 
     $oGrid = new paloSantoGrid($smarty);
     $oGrid->showFilter(
               "<table width='100%' border='0'><tr>".
               "<td><input type='submit' name='submit_create_form' value='"._tr('Create New Quota')."' class='button'></td>".
-//              "<td class='letra12' align='right'><b>"._tr('Status').":</b>&nbsp;$combo_estados</td>".
               "</tr></table>");
     $sContenido = $oGrid->fetchGrid($arrGrid, $arrData, $arrLang);
     if (strpos($sContenido, '<form') === FALSE)
