@@ -44,5 +44,6 @@ $arrLangModule=array(
 "Quota Name" => "Nombre de cuota",
 "ID Form" => "ID Formulario",
 "Quota List"	=> "Listado de cuotas",
+"Are you sure you wish to delete form?"=>"¿Est&aacute; seguro que desea eliminar la cuota?",
 );
 ?>
