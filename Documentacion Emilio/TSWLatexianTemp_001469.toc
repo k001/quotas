@@ -1,0 +1,38 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{1}
+\contentsline {chapter}{\numberline {2}La encuesta}{3}
+\contentsline {section}{\numberline {2.1}Elementos b'asicos de una encuesta}{4}
+\contentsline {subsection}{\numberline {2.1.1}T'itulo de la encuesta}{4}
+\contentsline {subsection}{\numberline {2.1.2}Grupos de Preguntas}{4}
+\contentsline {subsection}{\numberline {2.1.3}Preguntas}{5}
+\contentsline {chapter}{\numberline {3}Interfaz administrativa}{6}
+\contentsline {section}{\numberline {3.1}Barra administrativa}{7}
+\contentsline {section}{\numberline {3.2}Barra de encuesta}{8}
+\contentsline {section}{\numberline {3.3}Botones comunes}{8}
+\contentsline {chapter}{\numberline {4}Creando una encuesta}{10}
+\contentsline {section}{\numberline {4.1}Opciones de la encuesta}{11}
+\contentsline {subsection}{\numberline {4.1.1}Crear, importar o copiar encuesta}{11}
+\contentsline {subsection}{\numberline {4.1.2}General}{11}
+\contentsline {paragraph}{ Precauci'on: }{14}
+\contentsline {section}{\numberline {4.2}Presentaci'on y Navegaci'on}{14}
+\contentsline {subsection}{\numberline {4.2.1}Publicaci'on y Control de acceso}{16}
+\contentsline {subsection}{\numberline {4.2.2}Notificaciones y Manejo de datos}{16}
+\contentsline {subsection}{\numberline {4.2.3}Participantes}{18}
+\contentsline {subsection}{\numberline {4.2.4}Importar}{18}
+\contentsline {subsection}{\numberline {4.2.5}Copiar}{19}
+\contentsline {subsection}{\numberline {4.2.6}Idiomas Adicionales}{19}
+\contentsline {section}{\numberline {4.3}Tipos de preguntas}{19}
+\contentsline {subsubsection}{Subpreguntas}{19}
+\contentsline {subsection}{\numberline {4.3.1}Matrices}{20}
+\contentsline {subsection}{\numberline {4.3.2}Matriz (Elegir del 1 al 5)}{20}
+\contentsline {subsection}{\numberline {4.3.3}Matriz (Elegir del 1 al 10)}{21}
+\contentsline {subsection}{\numberline {4.3.4}Matriz de doble escala}{22}
+\contentsline {subsection}{\numberline {4.3.5}G'enero}{22}
+\contentsline {subsection}{\numberline {4.3.6}Entrada num'erica}{23}
+\contentsline {subsection}{\numberline {4.3.7}Listas de radio}{23}
+\contentsline {subsection}{\numberline {4.3.8}Entradas de texto libre}{24}
+\contentsline {subsection}{\numberline {4.3.9}Entradas de texto libre largo}{24}
+\contentsline {subsection}{\numberline {4.3.10}Entradas de texto libre enorme}{25}
+\contentsline {subsection}{\numberline {4.3.11}Activando una encuesta}{26}
+\contentsline {section}{\numberline {4.4}Cuotas}{27}
+\contentsline {subsection}{\numberline {4.4.1}Agregar una nueva cuota}{28}

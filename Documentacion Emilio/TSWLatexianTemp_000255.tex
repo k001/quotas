@@ -1,0 +1,220 @@
+
+%CONFIGURACION DEL DOCUMENTO
+\documentclass[12pt,spanish]{report}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{epsfig}
+\usepackage{setspace}
+\oddsidemargin 0.2in
+\textwidth 6.5in
+\topmargin -0.25in
+\textheight 9in
+\pagestyle{myheadings}
+
+% INICIO DEL DOCUMENTO
+\begin{document}
+\doublespacing
+\pagenumbering{roman}
+\tableofcontents
+%\listoffigures
+%\listoftables
+\newpage
+
+% CAPITULO INTRODUCCION.Tiene por objeto proporcionar una visi'on general del documento.
+\pagenumbering{arabic}
+\chapter{Introducci\'on}
+\newpage
+
+\emph{LimeSurvey} permite a los usuarios crear de forma r'apida, potente e intuitiva, encuestas en las que pueden participar decenas de miles de participantes sin mucho esfuerzo, funcionando como auto-gu'ia para los encuestados que participan en las encuestas. Este manual se centra en c'omo crear, administrar y apoyar a los administradores y usuarios de la aplicaci'on.
+
+El equipo de desarrollo de \emph{LimeSurvey} ha realizado grandes cambios y añadido nuevas caracter'isticas durante el desarrollo de la aplicaci'on en los 'ultimos años. Aseg'urese de actualizar a la ultima versi'on para poder hacer uso de todas las caracter'isticas que se resaltan en esta documentaci'on.
+
+%Este trabajo recepcional presenta el desarrollo de los temas que fueron necesarios para la elaboraci\'on de un proyecto en el \emph{DIF Municipal de Zapopan}.\\
+%Este documento presenta la explicaci\'on del \emph{porqu\'e, para qu\'e} y \emph{c\'omo} fue desarrollado el \emph{Proyecto de Automatizaci\'on del Control de las Adquisiciones} efectuadas por la Instituci\'on antes mencionada.\\
+%Dicha automatizaci\'on fue requerida por el \emph{C. Ing. Juan Rodolfo Villaseñor P\'erez}. El prop\'osito principal del proyecto fue la agilizaci\'on y actualizaci\'on de requisici\'on de materiales necesarios en el propio \emph{Sistema DIF Municipal Zapopan}.\\
+
+\newpage
+
+% CAPITULO ANTECEDENTES Y DESCRIPCI'oN DE LA EMPRESA. Una breve historia y estatus de la empresa en el mercado, misiòn, visiòn, ubicaci'on, etc.
+\chapter{Creaci'on de una encuesta}
+\newpage
+
+\section{\text{Elementos b'asicos de una encuesta}}
+Una {\bf encuesta} tiene 3 elementos esenciales que deben aparecer siempre:
+
+\begin{itemize}
+\item Un nombre.
+\item Al menos un grupo.
+\item Al menos una pregunta.
+\end{itemize}
+
+Otros elementos opcionales en una nueva {\bf encuesta}  pueden ser:
+\begin{itemize}
+\item Respuestas aplicables para cada pregunta.
+\item Subpreguntas, aplicables a preguntas.
+\item Condiciones que determinan si una pregunta debe ser realizada.
+\item Cuotas.
+\item Entre otras muchas m'as.
+\end{itemize}
+
+
+\subsection{T'itulo de la encuesta}
+\label{'titulo_encuesta'}
+
+Proporciona un nombre 'unico para una encuesta, el cual se utiliza adem'as como opci'on en el listado de Encuestas para acceder a varias configuraciones aplicables a la encuesta como un todo. Opciones tales como el mensaje personalizado en la pantalla de bienvenida, la descripci'on de la encuesta, la informaci'on de contacto con el administrador de la encuesta, y la forma en que ser'an hechas las preguntas.
+
+\subsection{Grupos de Preguntas}
+\label{'grupo_preguntas'}
+
+Una encuesta necesita que cada pregunta sea miembro de un grupo (y s'olo de ese grupo). Dependiendo del n'umero de preguntas en la encuesta, los {\bf Grupos} se pueden usar para definir secciones l'ogicas, tem'aticas en com'un, o posiblemente p'aginas por pantalla. Un grupo puede tener preguntas sobre un tema en particular o simplemente sea una agrupaci'on de preguntas que las haga m'as manejables.
+
+Un grupo de preguntas tiene un t'itulo y una descripci'on opcional. Debe haber al menos uno en cada encuesta, incluso si no se desea dividir la encuesta en varios grupos.
+
+\subsection{Preguntas}
+\label{'preguntas'}
+
+Las preguntas son el n'ucleo de la encuesta. No hay un l'imite real al n'umero de preguntas que puede haber en la encuesta o en un grupo. Las preguntas incluyen el texto mismo de la pregunta, as'i como la configuraci'on que determina qu'e tipo de respuesta aceptar'an. Es posible, adem'as, especificar un pequeño texto explicativo (ayuda) para cada pregunta y determinar si la pregunta es obligatoria u opcional. Para m'as detalles, revisar la secci'on tipos de preguntas ver en p'agina ~\pageref{'tipos_preguntas'}.
+
+
+
+\section{Ubicaci\'on}
+
+La Instituci\'on se encuentra ubicada en:
+\vspace{0.1in}
+
+\begin{center}
+\bfseries{Direcci\'on: Avenida Laureles S/N \\
+            Colonia: Unidad Habitacional FOVISSTE \\
+            Zapopan, Jalisco, M\'exico}
+\end{center}
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{c}
+\par
+\psfig{file=utzmg_logo.eps,height=2.4in,width=1.83in}
+\par
+\end{tabular}
+\caption{Figura que sirve de ejemplo para que se lustre una etiqueta}
+\end{figure}
+\newpage
+
+%CAPITULO PROBLEMATICA(redactar el planteamiento de la problematica que pretende resolver) Y DESCRIPCION DEL PROYECTO.(panorama general del proyecto, aspectos economicos, operativos, tecnicos, humanos, objetivos, etc) 
+\chapter{Problem\'atica y Descripci\'on del Proyecto}
+\newpage
+
+\section{Problem\'atica}
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+
+\begin{enumerate}
+\item Es un sistema de composici\'on de textos de alto nivel
+\item Es un conjunto de macros dise\~nados para facilitar las tareas de escribir documentos
+\item Es un procesador de textos
+\end{enumerate}
+
+\subsection{Casos Reales}
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+
+\section{Descripci\'on del Proyecto}
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+\newpage
+
+%CAPITULO MARCO TEORICO(bases teòricas del proyecto) Y DESARROLLO DEL PROYECTO (procedimiento o descripci'on de las actividades realizadaas)
+\chapter{Marco Te\'orico y Desarrollo del Proyecto}
+\newpage
+
+\section{Marco Te\'orico}
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+
+\subsection{Prueba}
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+
+\section{Desarrollo del Proyecto}
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO. ESTE ES UN EJEMPLO.
+\newpage
+
+% CAPITULO RESULTADOS(estatus del proyecto y posibles mejoras) Y CONCLUSIONES(problemas presentados, costos, restrasos, cumplimiento de objetivos, etc)
+\chapter{Resultados y Conclusiones}
+\newpage
+
+\section{Resultados}
+
+El resultado durante este periodo de estadia fue la correcta implantaci\'on del sistema en el \textbf{DIF Municipal Zapopan}, la cual trajo enormes beneficios para la empresa debido a un ahorro considerable de tiempo y disminuci\'on en los errores humanos cometidos anteriormente al uso de este sistema.
+
+\section{Conclusiones}
+
+En el sistema \emph{DIF Municipal Zapopan} existen otros sistemas de control que pueden ser reemplazados por controles agilizados de manera tal que el \emph{Sistema DIF Zapopan} brinde un mejor servicio a la poblaci\'on zapopana.\\
+
+\newpage
+
+% APENDICE O ANEXO (infoemacion adicional que se quiera anexar o agregar
+% BIBLIOGRAFIA
+\appendix
+\chapter{Bibliograf\'ia}
+
+\begin{description}
+\item[Tocci, Ronald J.]{\emph{Sistemas Digitales. Principios y Aplicaciones.}} Prentice Hall, Tercera Edici\'on, 1987.
+\item[Centro de Computaci\'on de M\'exico.] {\emph{Lenguaje de Programaci\'on Computacional.}} Segunda Edici\'on. Prentice Hall.
+\item[Sitio] \underline{\emph{www.visualencastellano.com}}
+\item[Sitio] \underline{\emph{www.comsto.org}}
+\end{description}
+
+\newpage
+
+%Otro apendice
+\chapter{Im\'agenes}
+
+Esto es un ejemplo de un capitulo que puede volverser apendice o anexo...........
+
+\newpage
+
+% GLOSARIO (listado de terminos tecnicos)
+\chapter{Glosario}
+
+\begin{description}
+\item[Asesor Industrial] Empleado de la empresa
+\item[Asesor Acad\'emico] Profesor que apoya asesorando al alumno en un proyecto espec'ifico.
+\end{description}
+
+\newpage
+
+
+% FIN DEL DOCUMENTO
+\end{document}
+
+

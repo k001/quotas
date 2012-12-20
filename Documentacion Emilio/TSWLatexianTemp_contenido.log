@@ -1,0 +1,403 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  19 DEC 2012 20:55
+entering extended mode
+ \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"/Users/k001/Desktop/Paginas/Cotizaciones/EMILIO/Documentacion Emilio/TSWLatexianTemp_contenido.tex"
+(/Users/k001/Desktop/Paginas/Cotizaciones/EMILIO/Documentacion Emilio/TSWLatexianTemp_contenido.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, german-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabic, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnish, french, friulan, galician, german, ngerman, swissgerman, monogreek, greek, hungarian, icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, oriya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, polish, portuguese, romanian, romansh, russian, sanskrit, serbian, serbianc, slovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (/usr/local/texlive/2012/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2008/07/08 v3.8m The Babel package
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/babel/spanish.ldf
+Language: spanish.ldf 2011/10/06 v5.0k Spanish support from the babel system
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+)
+\es@datefmt=\count89
+\es@quottoks=\toks14
+\es@quotdepth=\count90
+Package babel Info: Making " an active character on input line 496.
+Package babel Info: Making . an active character on input line 599.
+Package babel Info: Making < an active character on input line 644.
+Package babel Info: Making > an active character on input line 644.
+Package babel Info: Making ' an active character on input line 671.
+)) (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+) (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count91
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+\epsfxsize=\dimen106
+\epsfysize=\dimen107
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/capt-of/capt-of.sty
+Package: capt-of 2009/12/29 v0.2 standard captions outside of floats
+)
+No file TSWLatexianTemp_contenido.aux.
+\openout1 = `TSWLatexianTemp_contenido.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Info: Redefining \. on input line 29.
+LaTeX Info: Redefining \% on input line 29.
+(/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count92
+\scratchdimen=\dimen108
+\scratchbox=\box26
+\nofMPsegments=\count93
+\nofMParguments=\count94
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count95
+\MPscratchDim=\dimen109
+\MPnumerator=\count96
+\makeMPintoPDFobject=\count97
+\everyMPtoPDFconversion=\toks17
+) (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+) (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+)) (/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+ (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+No file TSWLatexianTemp_contenido.toc.
+\tf@toc=\write3
+\openout3 = `TSWLatexianTemp_contenido.toc'.
+
+[1
+
+
+{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Cap\'{\i }tulo 1.
+[1
+
+]
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ± in font cmr12!
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ± in font cmr12!
+ [2]
+Cap\'{\i }tulo 2.
+[3
+
+] [4]
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ± in font cmr12!
+
+
+LaTeX Warning: Reference `'tipos_preguntas'' on page 5 undefined on input line 83.
+
+[5]
+Cap\'{\i }tulo 3.
+[6
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+<barra_administrativa.png, id=29, 424.58624pt x 54.2025pt>
+File: barra_administrativa.png Graphic file (type png)
+ <use barra_administrativa.png>
+Package pdftex.def Info: barra_administrativa.png used on input line 95.
+(pdftex.def)             Requested size: 424.5852pt x 54.20236pt.
+ <icons/home.png, id=30, 20.075pt x 20.075pt>
+File: icons/home.png Graphic file (type png)
+ <use icons/home.png>
+Package pdftex.def Info: icons/home.png used on input line 100.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ <icons/add.png, id=31, 20.075pt x 20.075pt>
+File: icons/add.png Graphic file (type png)
+ <use icons/add.png>
+Package pdftex.def Info: icons/add.png used on input line 103.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ [7 <./barra_administrativa.png> <./icons/home.png> <./icons/add.png>]
+File: icons/add.png Graphic file (type png)
+ <use icons/add.png>
+Package pdftex.def Info: icons/add.png used on input line 108.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+
+ []
+
+<barra_encuesta.png, id=37, 412.54124pt x 42.1575pt>
+File: barra_encuesta.png Graphic file (type png)
+ <use barra_encuesta.png>
+Package pdftex.def Info: barra_encuesta.png used on input line 110.
+(pdftex.def)             Requested size: 412.54024pt x 42.15738pt.
+ <icons/edit.png, id=39, 20.075pt x 20.075pt>
+File: icons/edit.png Graphic file (type png)
+ <use icons/edit.png>
+Package pdftex.def Info: icons/edit.png used on input line 116.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ <icons/delete.png, id=40, 20.075pt x 20.075pt>
+File: icons/delete.png Graphic file (type png)
+ <use icons/delete.png>
+Package pdftex.def Info: icons/delete.png used on input line 116.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ <icons/organize_3.png, id=41, 20.075pt x 20.075pt>
+File: icons/organize_3.png Graphic file (type png)
+ <use icons/organize_3.png>
+Package pdftex.def Info: icons/organize_3.png used on input line 117.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ <icons/dumpquestion_2.png, id=42, 20.075pt x 20.075pt>
+File: icons/dumpquestion_2.png Graphic file (type png)
+ <use icons/dumpquestion_2.png>
+Package pdftex.def Info: icons/dumpquestion_2.png used on input line 118.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ [8 <./barra_encuesta.png> <./icons/edit.png> <./icons/delete.png> <./icons/organize_3.png> <./icons/dumpquestion_2.png>] [9]
+Cap\'{\i }tulo 4.
+[10
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
+
+ []
+
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ¡ in font cmr12!
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ¡ in font cmr12!
+[11]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 157.
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 157.
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--158
+
+ []
+
+[12]
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ­ in font cmr12!
+ [13] [14] [15] [16] [17]
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ± in font cmr12!
+ [18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 303--304
+
+ []
+
+<screenshots/A.png, id=86, 451.6875pt x 200.75pt>
+File: screenshots/A.png Graphic file (type png)
+ <use screenshots/A.png>
+Package pdftex.def Info: screenshots/A.png used on input line 305.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
+
+ []
+
+[20 <./screenshots/A.png (PNG copy)>] <screenshots/B.png, id=90, 451.6875pt x 200.75pt>
+File: screenshots/B.png Graphic file (type png)
+ <use screenshots/B.png>
+Package pdftex.def Info: screenshots/B.png used on input line 313.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ [21 <./screenshots/B.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
+
+ []
+
+<screenshots/1.png, id=94, 451.6875pt x 200.75pt>
+File: screenshots/1.png Graphic file (type png)
+ <use screenshots/1.png>
+Package pdftex.def Info: screenshots/1.png used on input line 322.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ <screenshots/G.png, id=95, 451.6875pt x 200.75pt>
+File: screenshots/G.png Graphic file (type png)
+ <use screenshots/G.png>
+Package pdftex.def Info: screenshots/G.png used on input line 329.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ <screenshots/N.png, id=96, 451.6875pt x 200.75pt>
+File: screenshots/N.png Graphic file (type png)
+ <use screenshots/N.png>
+Package pdftex.def Info: screenshots/N.png used on input line 336.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ [22 <./screenshots/1.png (PNG copy)> <./screenshots/G.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
+
+ []
+
+<screenshots/L.png, id=100, 451.6875pt x 200.75pt>
+File: screenshots/L.png Graphic file (type png)
+ <use screenshots/L.png>
+Package pdftex.def Info: screenshots/L.png used on input line 343.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
+
+ []
+
+<screenshots/S1.png, id=101, 451.6875pt x 200.75pt>
+File: screenshots/S1.png Graphic file (type png)
+ <use screenshots/S1.png>
+Package pdftex.def Info: screenshots/S1.png used on input line 350.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ [23 <./screenshots/N.png (PNG copy)> <./screenshots/L.png (PNG copy)>] <screenshots/T.png, id=105, 451.6875pt x 200.75pt>
+File: screenshots/T.png Graphic file (type png)
+ <use screenshots/T.png>
+Package pdftex.def Info: screenshots/T.png used on input line 356.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ <screenshots/U.png, id=106, 451.6875pt x 200.75pt>
+File: screenshots/U.png Graphic file (type png)
+ <use screenshots/U.png>
+Package pdftex.def Info: screenshots/U.png used on input line 362.
+(pdftex.def)             Requested size: 451.68639pt x 200.7495pt.
+ [24 <./screenshots/S1.png (PNG copy)> <./screenshots/T.png (PNG copy)>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 366.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 366.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 366.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 366.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 366.
+ [25 <./screenshots/U.png (PNG copy)>] <icons/inactive.png, id=117, 20.075pt x 20.075pt>
+File: icons/inactive.png Graphic file (type png)
+ <use icons/inactive.png>
+Package pdftex.def Info: icons/inactive.png used on input line 373.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ <icons/activate.png, id=118, 7.52812pt x 15.05624pt>
+File: icons/activate.png Graphic file (type png)
+ <use icons/activate.png>
+Package pdftex.def Info: icons/activate.png used on input line 373.
+(pdftex.def)             Requested size: 7.52809pt x 15.0562pt.
+ <screenshots/activating.png, id=119, 350.30875pt x 303.1325pt>
+File: screenshots/activating.png Graphic file (type png)
+ <use screenshots/activating.png>
+Package pdftex.def Info: screenshots/activating.png used on input line 381.
+(pdftex.def)             Requested size: 350.30789pt x 303.13176pt.
+ <screenshots/activating2.png, id=120, 454.69875pt x 180.675pt>
+File: screenshots/activating2.png Graphic file (type png)
+ <use screenshots/activating2.png>
+Package pdftex.def Info: screenshots/activating2.png used on input line 388.
+(pdftex.def)             Requested size: 454.69763pt x 180.67455pt.
+ [26 <./icons/inactive.png> <./icons/activate.png> <./screenshots/activating.png>] <icons/quota.png, id=127, 20.075pt x 20.075pt>
+File: icons/quota.png Graphic file (type png)
+ <use icons/quota.png>
+Package pdftex.def Info: icons/quota.png used on input line 395.
+(pdftex.def)             Requested size: 20.07494pt x 20.07494pt.
+ <screenshots/nueva_cuota.png, id=128, 120.45pt x 21.07875pt>
+File: screenshots/nueva_cuota.png Graphic file (type png)
+ <use screenshots/nueva_cuota.png>
+Package pdftex.def Info: screenshots/nueva_cuota.png used on input line 398.
+(pdftex.def)             Requested size: 120.44969pt x 21.07867pt.
+ <screenshots/form_nueva_cuota.png, id=129, 940.51375pt x 425.59pt>
+File: screenshots/form_nueva_cuota.png Graphic file (type png)
+ <use screenshots/form_nueva_cuota.png>
+Package pdftex.def Info: screenshots/form_nueva_cuota.png used on input line 400.
+(pdftex.def)             Requested size: 505.88942pt x 289.09213pt.
+ [27 <./screenshots/activating2.png> <./icons/quota.png> <./screenshots/nueva_cuota.png>] [28 <./screenshots/form_nueva_cuota.png>] (./TSWLatexianTemp_contenido.aux
+LaTeX Info: Redefining \. on input line 7.
+LaTeX Info: Redefining \% on input line 7.
+)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 2383 strings out of 493488
+ 34213 string characters out of 3141326
+ 90445 words of memory out of 3000000
+ 5648 multiletter control sequences out of 15000+200000
+ 9500 words of font info for 33 fonts, out of 3000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 37i,8n,27p,680b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on TSWLatexianTemp_contenido.pdf (29 pages, 386259 bytes).
+PDF statistics:
+ 166 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+

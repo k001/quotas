@@ -1,0 +1,24 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{1}
+\contentsline {chapter}{\numberline {2}Creaci'on de una encuesta}{3}
+\contentsline {section}{\numberline {2.1}Elementos b'asicos de una encuesta}{4}
+\contentsline {subsection}{\numberline {2.1.1}T'itulo de la encuesta}{4}
+\contentsline {subsection}{\numberline {2.1.2}Grupos de Preguntas}{4}
+\contentsline {subsection}{\numberline {2.1.3}Preguntas}{5}
+\contentsline {section}{\numberline {2.2}Interfaz administrativa}{6}
+\contentsline {subsection}{\numberline {2.2.1}Barra administrativa}{6}
+\contentsline {section}{\numberline {2.3}Ubicaci\'on}{6}
+\contentsline {chapter}{\numberline {3}Problem\'atica y Descripci\'on del Proyecto}{8}
+\contentsline {section}{\numberline {3.1}Problem\'atica}{9}
+\contentsline {subsection}{\numberline {3.1.1}Casos Reales}{9}
+\contentsline {section}{\numberline {3.2}Descripci\'on del Proyecto}{9}
+\contentsline {chapter}{\numberline {4}Marco Te\'orico y Desarrollo del Proyecto}{11}
+\contentsline {section}{\numberline {4.1}Marco Te\'orico}{12}
+\contentsline {subsection}{\numberline {4.1.1}Prueba}{12}
+\contentsline {section}{\numberline {4.2}Desarrollo del Proyecto}{12}
+\contentsline {chapter}{\numberline {5}Resultados y Conclusiones}{13}
+\contentsline {section}{\numberline {5.1}Resultados}{14}
+\contentsline {section}{\numberline {5.2}Conclusiones}{14}
+\contentsline {chapter}{\numberline {A}Bibliograf\'ia}{15}
+\contentsline {chapter}{\numberline {B}Im\'agenes}{16}
+\contentsline {chapter}{\numberline {C}Glosario}{17}
